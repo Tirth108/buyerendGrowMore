@@ -1,33 +1,53 @@
 <?php
 
 include 'partial/header.php';
+
+// echo $_SERVER['REQUEST_METHOD'];
+// echo "------------------------------------------------------------";
+// header("location:home.php");
 $login = false;
 $showError = false;
  
 if($_SERVER['REQUEST_METHOD']=='POST'){
-    include 'partial/db_connect.php';
+//  echo "--------------------------------hii";
+    include 'include/db_connect.php';
     $mobile_no = $_POST['mobile_no'];
     $password = $_POST['password'];
 
     $sql = "Select * from user where mobile_number ='$mobile_no' AND password='$password'";
     $result = mysqli_query($conn,$sql);
     $num = mysqli_num_rows($result);
+    
+    // setcookie("idRegister","1",time() + 86400,"/")
+    // echo $row;
+    
     if($num==1){
+        $row=mysqli_fetch_assoc($result);
+        setcookie("idRegister",$row['idRegister'],time() + 86400,"/");
+        // echo $row['idRegister'];
         $login = true;
+        
+       
         header("location:website.php");
     }else{
         $showError = "Invalid Credentials";
     }
 }
-?>
-<?php
+
+ ?>
+ <?php
+// echo $_SERVER['REQUEST_METHOD'];
     if($login){
+
+        echo "-----------------------------------------------------------------------------------" . $login;
+
     echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> You are logged in
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div> ';
+    // header("location:home.php");
     }
     if($showError){
     echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -58,5 +78,3 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   </div>
 </form>   </div>
 </section><!-- End Hero -->
- 
-

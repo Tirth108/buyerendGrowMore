@@ -15,13 +15,11 @@ $num = mysqli_num_rows($result);
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="website.php">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Fabrics</a></li>
-						<li><a href="#">Kid's Wear</a></li>
-						<li><a href="#">Women's Wear</a></li>
-						<li><a href="men.php">Men's Wear</a></li>
+						<li><a href="website.php">Home</a></li>
+						<li><a href="fabric.php">Fabrics</a></li>
+						<li><a href="kid.php">Kid's Wear</a></li>
+						<li><a href="women.php">Women's Wear</a></li>
+						<li  class="active"><a href="men.php">Men's Wear</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -40,7 +38,7 @@ $num = mysqli_num_rows($result);
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="website.php">Home</a></li>
-							<li><a href="#">All Categories</a></li>
+							
 							<li><a href="men.php">Men's Wear</a></li>
 						</ul>
 					</div>
@@ -75,15 +73,12 @@ $num = mysqli_num_rows($result);
 									</div>
 									<div class="product-body">
 										<p class="product-category">'.$row['categoryname'].'</p>
-										<h3 class="product-name"><a href="#">'.$row['pname'].'</a></h3>
+										<h3 class="product-name"><a href="product.php?pid='.$row['idproduct'].'&sellerid='.$row['puser_idRegister'].'">'.$row['pname'].'</a></h3>
 										<h6 class="product-price">Price :- '.$row['price'].'</h6>
 										<h3 class="product-mrp"> MRP :- ' .$row['MRP'].'</h3>
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 									</div>
 								</div>
 							</div>
@@ -107,42 +102,6 @@ $num = mysqli_num_rows($result);
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
 
 <?php
 

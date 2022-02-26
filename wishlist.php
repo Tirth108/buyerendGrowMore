@@ -1,10 +1,11 @@
 <?php
-
 include'include/header.php';
 include'include/db_connect.php';
-$sql = "SELECT * FROM product JOIN subcategory on product.subcategory_idsubcategory=subcategory.idsubcategory JOIN category ON subcategory.category_idcategory=category.idcategory WHERE category.idcategory=4;";
+$uid=$_COOKIE['idRegister'];
+$sql = "SELECT * FROM `wishlist` NATURAL JOIN product  NATURAL JOIN subcategory WHERE wishlist.User_idRegister=$uid AND wishlist.product_idproduct=product.idproduct and product.subcategory_idsubcategory=subcategory.idsubcategory";
 $result = mysqli_query($conn,$sql);
 $num = mysqli_num_rows($result);
+
 ?>
 
 		<!-- NAVIGATION -->
@@ -15,9 +16,11 @@ $num = mysqli_num_rows($result);
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li><a href="website.php">Home</a></li>
+						<li class="active"><a href="website.php">Home</a></li>
+						
+						
 						<li><a href="fabric.php">Fabrics</a></li>
-						<li class="active"><a href="kid.php">Kid's Wear</a></li>
+						<li><a href="kid.php">Kid's Wear</a></li>
 						<li><a href="women.php">Women's Wear</a></li>
 						<li><a href="men.php">Men's Wear</a></li>
 					</ul>
@@ -39,7 +42,7 @@ $num = mysqli_num_rows($result);
 						<ul class="breadcrumb-tree">
 							<li><a href="website.php">Home</a></li>
 							
-							<li><a href="kid.php">Kid's Wear</a></li>
+							<li><a href="Wishlist.php">Wishlist</a></li>
 						</ul>
 					</div>
 				</div>
@@ -57,8 +60,18 @@ $num = mysqli_num_rows($result);
 				<div class="row">
 					
 					<!-- STORE -->
-					<div id="store" class="col-md-13">
-						
+					<div id="store" class="col-md-12">
+                    <div class="section-title">
+                    <h3 class="title">Wishlist</h3>
+                    <!-- <div class="section-nav">
+                        <ul class="section-tab-nav tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1">Fabrics</a></li>
+                            <li><a data-toggle="tab" href="kid.php">Kid's Wear</a></li>
+                            <li><a data-toggle="tab" href="women.php">Women's Wear</a></li>
+                            <li><a data-toggle="tab" href="men.php">Men's Wear</a></li>
+                        </ul>
+                    </div> -->
+                </div>
 						<!-- store products -->
 						<div class="row">
                     <?php
@@ -72,8 +85,8 @@ $num = mysqli_num_rows($result);
 										<img src='.$row['image'].' alt="Sorry , for the error" height=200px width=150px>
 									</div>
 									<div class="product-body">
-										<p class="product-category">'.$row['categoryname'].'</p>
-										<h3 class="product-name"><a href="product.php?pid='.$row['idproduct'].'&sellerid='.$row['puser_idRegister'].'">'.$row['pname'].'</a></h3>
+										<p class="product-category">'.$row['subcategoryname'].'</p>
+										<h3 class="product-name"><a href=product.php?pid='.$row['idproduct'].'&sellerid='.$row['puser_idRegister'].'>'.$row['pname'].'</a></h3>
 										<h6 class="product-price">Price :- '.$row['price'].'</h6>
 										<h3 class="product-mrp"> MRP :- ' .$row['MRP'].'</h3>
 										<div class="product-btns">
@@ -102,42 +115,6 @@ $num = mysqli_num_rows($result);
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
-		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
 
 <?php
 

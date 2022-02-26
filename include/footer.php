@@ -10,7 +10,7 @@
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">About Us</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<p>We are B2B Platform for clothing industry .</p>
 								<ul class="footer-links">
 									<li><a href="#"><i class="fa fa-map-marker"></i>Navrangpura</a></li>
 									<li><a href="#"><i class="fa fa-phone"></i>+91 70000 00000</a></li>
@@ -23,9 +23,9 @@
 							<div class="footer">
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Fabrics</a></li>
-									<li><a href="#">Kid's Wear</a></li>
+									
+									<li><a href="fabric.php">Fabrics</a></li>
+									<li><a href="kid.php">Kid's Wear</a></li>
 									<li><a href="#">Women's Wear</a></li>
 									<li><a href="#">Men's Wear</a></li>
 								</ul>

@@ -580,6 +580,7 @@ textarea.input {
   top: 0px;
 }
 
+
 .cart-dropdown .cart-list .product-widget .product-body .product-price {
   color: #2B2D42;
 }
@@ -2193,4 +2194,31 @@ textarea.input {
     float: none;
     margin-top: 10px;
   }
+}
+
+b {text-align: center;}
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+.btns{
+    position: absolute;
+    top: 216px;
+    left: 328px;
+    display: flex;
+}
+
+.btn{
+    background: transparent;
+    border: none;
+    margin: 87px;
+    font-size: 88px;
+    outline: none;
+    color: white;
+}
+
+.btn i:hover{
+    cursor: pointer;
 }

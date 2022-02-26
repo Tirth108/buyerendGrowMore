@@ -13,10 +13,10 @@ include'include/db_connect.php';
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Fabrics</a></li>
-						<li><a href="#">Kid's Wear</a></li>
+						
+						
+						<li><a href="fabric.php">Fabrics</a></li>
+						<li><a href="kid.php">Kid's Wear</a></li>
 						<li><a href="#">Women's Wear</a></li>
 						<li><a href="#">Men's Wear</a></li>
 					</ul>
@@ -37,7 +37,7 @@ include'include/db_connect.php';
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="website.php">Home</a></li>
-							<li><a href="#">All Categories</a></li>
+							
 							<li><a href="#">Men's Wear</a></li>
 							<li class="active">Headphones (227,490 Results)</li>
 						</ul>

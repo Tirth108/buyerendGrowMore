@@ -616,7 +616,7 @@ echo'
   ?>
   <?php
 
-  include 'partial/footer.php';
+  //include '/footer.php';
 
   ?>
   <?php echo'
