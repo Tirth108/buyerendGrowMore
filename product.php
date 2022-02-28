@@ -22,6 +22,7 @@ $result5 = mysqli_query($conn,$sql5);
 $row5 = mysqli_fetch_assoc($result5);
 if(isset($_POST['addtocart']))
 {
+
 $qty=$_POST['qty'];
 if($num4==0 || mysqli_num_rows($result1)>0)
 {
@@ -31,6 +32,7 @@ if($num4==0 || mysqli_num_rows($result1)>0)
 	// echo "<br> id :".$id;
 			if($sid==$uid)
 			{
+               
 				echo "
 			<div class='alert alert-warning'>
 			 		<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
@@ -39,6 +41,7 @@ if($num4==0 || mysqli_num_rows($result1)>0)
 			}
 			else if($row3>0)
 			{	
+              
 			echo "
 			<div class='alert alert-warning'>
 			 		<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
@@ -51,6 +54,7 @@ if($num4==0 || mysqli_num_rows($result1)>0)
 			$InsertCart = "INSERT INTO `cart` (`product_idproduct`,`User_idRegister`,`qty` ) VALUES ($id,$uid,$qty)";
 			$res=mysqli_query($conn,$InsertCart);
 				if($res>0){
+                    
                     echo "<div class='alert alert-warning'>
 					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
 					<b>Product added in your cart..!</b>
@@ -69,6 +73,7 @@ else{
 			<b>You have already another seller product in your cart ..!</b>
 			 </div>";
 }
+
 }
 if(isset($_POST['addtowishlist']))
 {

@@ -6,6 +6,6 @@
     $result = mysqli_query($conn,$sql);
     if($result)
     {
-        Redirect to 
+    
     }
 ?>

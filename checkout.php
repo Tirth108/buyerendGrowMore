@@ -33,7 +33,7 @@ if(isset($_POST['placeorder']))
                 $result6 = mysqli_query($conn,$sql6);
                 if($result6)
                 {
-                    
+                    // header("Location:success.php");
                 }
             }
         }
@@ -226,7 +226,7 @@ if(isset($_POST['placeorder']))
                         <div style="text-align:left"><strong>Total Amount = <?php echo $subtotal;?></strong></div>
                         <div><strong class="order-total"></strong></div>
                     </div>
-            <!-- </div> -->
+                    <!-- </div> -->
                     <!-- <div class="payment-method">
                         <div class="input-radio">
                             <input type="radio" name="payment" id="payment-1">
@@ -278,7 +278,7 @@ if(isset($_POST['placeorder']))
                     <form method="post">
                     <button class="primary-btn order-submit" name="placeorder"><i class="fa fa-shopping-cart"></i> place order</button>
                     <input type="hidden" name="taxable" value='.$taxable.'>
-                                        <input type="hidden" name="tax" value='.$gst.'>
+                                        
                                         <input type="hidden" name="subtotal" value='.$subtotal.'>
                     </form>';?>
                 </div>

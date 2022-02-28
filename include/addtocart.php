@@ -10,9 +10,9 @@ if(isset($_POST['del']))
     $id = $_POST['pid'];
     $sql="DELETE FROM `cart` WHERE cart.product_idproduct=$id and cart.User_idRegister=$uid";
     $result = mysqli_query($conn,$sql);
-    //echo "hii";
     if($result)
     {
+        header ("Refresh:0");
     }
 }
 ?>
@@ -42,9 +42,9 @@ if(isset($_POST['del']))
 									</div>
                                             <form method="post">
 												<div class="product-body">
-													<h3 class="product-name"><a href="product.php?pid='.$row2['idproduct'].'&sellerid='.$row2['puser_idRegister'].'">'.$row2['pname'].'</a></h3>
+													<h3 class="product-name"><a href="product.php?pid='.$row2['idproduct'].'&sellerid='.$row2['User_idRegister'].'">'.$row2['pname'].'</a></h3>
 													<h4 class="product-price"><span class="qty">'.$row2['qty'].' x</span>₹ '.$row2['price'].'</h4>
-                                                    <input type="hidden" name="pid" value='.$row2['idproduct'].'>'.$row2['idproduct'].'
+                                                    <input type="hidden" name="pid" value='.$row2['idproduct'].'>
                                                    <button name="del"><i class="fa fa-close"> Delete </i></button>
 
 												</div>

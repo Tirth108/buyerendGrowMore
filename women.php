@@ -54,7 +54,7 @@ $num = mysqli_num_rows($result);
     <div class="container">
         <!-- row -->
         <div class="row">
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 <div class="section-title">
                     <h3 class="title">Women's Wear</h3>
                     <div class="section-nav">
@@ -66,7 +66,7 @@ $num = mysqli_num_rows($result);
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- /section title -->
             <!-- SECTION -->
                         <!-- STORE -->
@@ -85,7 +85,7 @@ $num = mysqli_num_rows($result);
 										<img src='.$row['image'].' alt="Sorry , for the error" height=200px width=150px>
 									</div>
 									<div class="product-body">
-										<p class="product-category">'.$row['categoryname'].'</p>
+										<p class="product-category">'.$row['subcategoryname'].'</p>
 										<h3 class="product-name"><a href="product.php?pid='.$row['idproduct'].'&sellerid='.$row['puser_idRegister'].'">'.$row['pname'].'</a></h3>
 										<h6 class="product-price">Price :- '.$row['price'].'</h6>
 										<h3 class="product-mrp"> MRP :- ' .$row['MRP'].'</h3>

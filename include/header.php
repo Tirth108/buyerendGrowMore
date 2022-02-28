@@ -21,6 +21,7 @@ include 'db_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,9 +71,26 @@ include 'db_connect.php';
                 </ul>
                 <ul class="header-links pull-right">
                     <li><a href="#"><i class="fa fa-dollar"></i> IND </a></li>
-                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-user-o"></i>
+                                <span>My Account</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <ul class="abc">
+                               <li> <a class="dropdown-item" href="#">Your Profile</a></li><br>
+                               <li> <a class="dropdown-item" href="#">Seller</a></li><br>
+                               <li> <a class="dropdown-item" href="order.php">Orders</a></li><br>
+                               <li> <a class="dropdown-item" href="#">Returns</a></li><br>
+                               <li> <a class="dropdown-item" href="#">Log Out</a></li><br>
+                            </ul>
+                            </div>
+                    </li>
+                    <!-- <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li> -->
                 </ul>
             </div>
+
         </div>
         <!-- /TOP HEADER -->
 

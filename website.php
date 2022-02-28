@@ -95,14 +95,14 @@ function myFunction {
             <div class="col-md-12">
                 <div class="section-title">
                     <h3 class="title">New Products</h3>
-                    <div class="section-nav">
+                    <!-- <div class="section-nav">
                         <ul class="section-tab-nav tab-nav">
                             <li class="active"><a data-toggle="tab" href="#tab1">Fabrics</a></li>
                             <li><a data-toggle="tab" href="kid.php">Kid's Wear</a></li>
                             <li><a data-toggle="tab" href="women.php">Women's Wear</a></li>
                             <li><a data-toggle="tab" href="men.php">Men's Wear</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- STORE -->
