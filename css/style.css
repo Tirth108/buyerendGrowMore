@@ -80,6 +80,11 @@ a:hover, a:focus {
   outline: none;
 }
 
+.addre{
+  text-align: right;
+  font-size: small;
+}
+
 ul.abc li a {
   color: black;
   margin-bottom: 8px;
@@ -2259,3 +2264,4 @@ b {text-align: center;}
   margin-top: 20px;
   margin-bottom: 20px;
 }
+

@@ -6,10 +6,12 @@
 <?php include "backend/header.php"; ?>
 <?php
 include "backend/db_connect.php";
-
+$id = $_COOKIE['idRetailer'];
 //how to fetch order details from database
-$sql = "SELECT * FROM sales_order_detail LEFT OUTER JOIN sales_order ON sales_order_detail.Sales_Order_idSales_Order =idSales_Order LEFT OUTER JOIN product_master on Product_Master_idProduct_Master =product_master.idProduct_Master WHERE sales_order.Retailer_idRetailer =" . $_COOKIE['idRetailer'] . "";
+// $sql = "SELECT * FROM sales_order_detail LEFT OUTER JOIN sales_order ON sales_order_detail.Sales_Order_idSales_Order =idSales_Order LEFT OUTER JOIN product_master on Product_Master_idProduct_Master =product_master.idProduct_Master WHERE sales_order.Retailer_idRetailer =" . $_COOKIE['idRetailer'] . "";
+$sql = "SELECT * FROM `sales_order` WHERE Retailer_idRetailer=$id ORDER by idSales_Order DESC";
 $ress = mysqli_query($conn, $sql);
+$num4 = mysqli_num_rows($ress);
 
 ?>
 
@@ -32,121 +34,100 @@ $ress = mysqli_query($conn, $sql);
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
 
                 <div class="wishlist-table table-content table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-
-                                <th class="product-price text-center alt-font">Images</th>
-                                <th class="product-name alt-font">Name</th>
-                                <th class="product-price text-center alt-font">Totle Price</th>
-                                <th class="product-subtotal text-center alt-font">Order Date</th>
-                                <th class="product-subtotal text-center alt-font">Status</th>
-                                <th class="product-subtotal text-center alt-font">Replace</th>
-                            </tr>
-                        </thead>
-
-                        <?php
-
-                        $summ = 0;
-                        $total = 0;
-
-                        while ($saleOrder = mysqli_fetch_assoc($ress)) {
-                            // echo $_COOKIE["idRetailer"];
-                            $sid = $saleOrder['idSales_Order'];
-                            $proid = $saleOrder['Product_Master_idProduct_Master'];
-
-                            echo $proid;
-
-
-
-                            if ($saleOrder['is_cancel'] == null) {
+                    <?php
+                    if ($num4 > 0) {
+                        while ($row = mysqli_fetch_assoc($ress)) {
+                            $date = date_create($row["Sales_Order_Date"]);
+                            date_add($date, date_interval_create_from_date_string("30 days"));
+                            $a = $row['idSales_Order'];
+                            if ($row['is_cancel'] == null) {
                                 $status = "Pending";
-                            } else if ($saleOrder['is_cancel'] == 1) {
-                                $status = "Rejected";
-                            } else if ($saleOrder['is_cancel'] == 0) {
-                                $status = "Accepted"."<br><br><a href='invoice.php'>Invoice</a>";
-                               
+                            } else if ($row['is_cancel'] == 1) {
+                                $status = 'Canclled <br>Cancel Reason : ' . $row['cancel_reason'] . '<br>Cancel Date : ' . $row['cancel_date'] . '</b>';
+                            } else if ($row['is_cancel'] == 0) {
+                                $status = "Accepted" . "<br><b>Credit due date : ( " . date_format($date, "Y-m-d") . " )</b>
+                                &nbsp  &nbsp  &nbsp <a href='invoice.php?orderid=" . $row['idSales_Order'] . "'><button type='submit'><b>Download Invoice</b></button></a>";
                             }
-                            // echo $saleOrder['is_cancel'];
-
-                            $qty = $saleOrder['Product_qty'];
-                            $taxable = $saleOrder['Product_Price'];
-                            $total1 = $qty * $taxable;
-                            $summ = ($total1 * 12) / 100;
-                            $total = $total1 + $summ;
-
-
                             echo '
-                            <tbody>
 
-                                        <tr>
-
-
-                                            <td class="product-thumbnail text-center">
-                                                <a href="#"><img src="admin/' . $saleOrder['image_url'] . '"  alt="" title="" /></a>
-                                                </td>
-                                            <td class="product-name">
-                                                <h4 class="no-margin"><b>' . $saleOrder['Product_Name'] . '</b></h4>
-                                                <span class="item-cat"><b>QTY-' . $saleOrder['Product_qty'] . '</b></span> &nbsp
-                                                  <span class="item-cat"><b>PRICE - ₹' . $saleOrder['Product_Price'] . '</b></span><br>
-                                                <span class="item-cat">' . $saleOrder['Product_Details'] . '</span>
-
-                                            </td>
-                                           
-                                            <td class="product-price text-center"><span class="amount"><b>₹ ' . $total . '<small><b>.00</small></span></td>
-                                            <td class="product-price text-center"><span class="amount"><b>' . $saleOrder['Sales_Order_Date'] . '</span></td>
-                                            <td class="product-price text-center"><span class="amount"><b>' . $status . '</span></td>
-                                            ';
-
-                            if ($saleOrder['is_cancel'] == null) {
-                                 echo '
-                                <td class="product-subtotal text-center">
-                                                         <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter">
-                                                          Cancel</button><br> 
-                                                           </td> ';
-                            } else if ($saleOrder['is_cancel'] == 1) {
-                            } else if ($saleOrder['is_cancel'] == 0) {
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr class="active">
+                                        <th><h4><b>ORDER No. : ODR00' . $row['idSales_Order'] . '</b></h4>
+                                        <b>Order Placed On: ( ' . $row['Sales_Order_Date'] . ' )</b>
+                                        
+                                        </th>
+                                        <th><b>Order Status : ' . $status . '</b></th>';
+                            if ($row['is_cancel'] == null) {
+                                echo '
+                                <th><a href="salesCancel.php?orderid=' . $row['idSales_Order'] . '" ><button type="button" class="btn btn-primary" >
+                                                          Cancel</button></a><br> 
+                                                           </th>  ';
+                            } else if ($row['is_cancel'] == 1) {
+                            } else if ($row['is_cancel'] == 0) {
 
                                 echo '
-                                <td class="product-subtotal text-center">
-                                                         <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter">
-                                                          Replace</button><br> 
-                                                           </td> ';
+                                <th><a href="salesReplace.php?orderid=' . $row['idSales_Order'] . '" ><button type="button" class="btn btn-primary">
+                                                          Replace</button></a><br> </th> ';
+                            }
+                            // include "track.php";
+                            echo '</th>
+                                    </th>
+                                    </tr>';
+                            $sql2 = "SELECT * FROM sales_order_detail LEFT OUTER JOIN sales_order ON sales_order_detail.Sales_Order_idSales_Order =idSales_Order LEFT OUTER JOIN product_master on Product_Master_idProduct_Master =product_master.idProduct_Master WHERE sales_order.Retailer_idRetailer =" . $_COOKIE['idRetailer'] . " AND sales_order.idSales_Order =" . $a . "";
+                            $result2 = mysqli_query($conn, $sql2);
+                            $summ = 0;
+                            $total = 0;
+                            while ($row2 = mysqli_fetch_assoc($result2)) {
+
+                                $proid = $row2['Product_Master_idProduct_Master'];
+                                $qty = $row2['Product_qty'];
+                                $taxable = $row2['Product_Price'];
+                                $total1 = $qty * $taxable;
+                                $total = $total + $total1;
+                                $summ = ($total * 12) / 100;
+
+                                echo '
+                                    <tr>
+                                        <td>
+                                            <img src="admin/' . $row2['image_url'] . '" alt="" width="100px" height="100px"/>
+                                        </td>
+                                        <td>
+                                            <span><b>Product Name : </b>' . $row2['Product_Name'] . '</span><br/>
+                                             <span><b>Details : </b>' . $row2['Product_Details'] . '</span><br/>
+                                            </td>
+                                        <td>
+                                        <span><b>Quantity : </b>' . $row2['Product_qty'] . '</span><br/>
+                                        <span><b>Product Price : </b>₹ ' . $row2['Product_Price'] . '</span><br/>
+                                       
+                                        </td>
+                                       
+                                    </tr>';
                             }
 
                             echo '
-
-                        </tr>
-                        </tbody>
-';
-                        } ?>
-                        <?php echo '
-               
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle"> ' . $proid . '  Reason of replace the product</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                   <input type="text" placeholder="Enter the reason" required></input>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <form method="post"><a href="salesReplace.php?idSalesOrder=' . $sid . '&idPro=' . $proid . '">
-                                    <button type="button" class="btn btn-primary" name="replace">Replace</button>
-                                  </a></form> 
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                            
-                                   
-                              '; ?>
-                    </table>
+                                <tr>
+                                <td colspan="2" align="right"><b>Taxable Amount :</b></td>
+                                <td><b>₹ ' . $row['taxable_amount'] . '</b><small><b>.00</b></small></td>
+                            </tr>
+                            <tr>
+                                        <td colspan="2" align="right"><b>Gst Amount :</b></td>
+                                        <td><b>₹ ' . $summ . ' </b><small><b>.00</b></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="right"><b>Total Amount :</b></td>
+                                        <td><b>₹ ' . $row['Total_Amount'] . '<small><b>.00</b></small></b></td>
+                                    </tr>
+                                </tbody>
+                            </table>';
+                        }
+                    } else {
+                        echo '
+                                <div class="empty-result">
+                        No Orders Found.
+                    </div>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>

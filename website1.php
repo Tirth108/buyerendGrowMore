@@ -131,7 +131,7 @@ include'include/db_connect.php';
 											</div>
 											<div class="product-body">
 												<p class="product-category">'.$row['subcategoryname'].'</p>
-												<h3 class="product-name"><a href=product.php?pid='.$row['idproduct'].'&sellerid='.$row['puser_idRegister'].'>'.$row['pname'].'</a></h3>
+												<h3 class="product-name"><a href=product.php?pid='.$row['idproduct'].'&sellerid='.$row['User_idRegister'].'>'.$row['pname'].'</a></h3>
 												<h4 class="product-price">₹ '.$row['price'].'</h4>
 						
 												<div class="product-btns">

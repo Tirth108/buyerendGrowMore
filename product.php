@@ -7,7 +7,7 @@ $sql="SELECT * FROM product INNER JOIN subcategory INNER JOIN category ON produc
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($result);
 $uid=$_COOKIE['idRegister'];
-$sql1="SELECT * FROM cart JOIN product ON cart.product_idproduct=product.idproduct WHERE cart.User_idRegister=$uid AND product.puser_idRegister=$sid";
+$sql1="SELECT * FROM cart JOIN product ON cart.product_idproduct=product.idproduct WHERE cart.User_idRegister=$uid AND product.User_idRegister=$sid";
 $result1 = mysqli_query($conn,$sql1);
 $row1= mysqli_fetch_assoc($result1);
 $num1=mysqli_num_rows($result1);
@@ -17,7 +17,7 @@ $row3= mysqli_fetch_assoc($result3);
 $sql4 = "SELECT * FROM cart WHERE User_idRegister = '$uid'";
 $result4 = mysqli_query($conn,$sql4);
 $num4=mysqli_num_rows($result4);
-$sql5 = "SELECT * FROM product NATURAL JOIN user WHERE product.puser_idRegister=user.idRegister";
+$sql5 = "SELECT * FROM product NATURAL JOIN user WHERE product.User_idRegister=user.idRegister";
 $result5 = mysqli_query($conn,$sql5);
 $row5 = mysqli_fetch_assoc($result5);
 if(isset($_POST['addtocart']))
@@ -209,7 +209,7 @@ if(isset($_POST['addtowishlist']))
                         <?php echo'
 							<tr>
 							<th>Seller</th>
-							<td><a href=user.php?id='.$row['puser_idRegister'].'>'.$row5['bussiness_name'].'</td></a>
+							<td><a href=user.php?id='.$row['User_idRegister'].'>'.$row5['bussiness_name'].'</td></a>
 						</tr>
 							<tr>
 								<th>MRP</th>
@@ -260,21 +260,3 @@ if(isset($_POST['addtowishlist']))
     <!-- /container -->
 </div>
 <!-- /SECTION -->
-
-
-
-<?php
-
-include'include/footer.php';
-?>
-<!-- jQuery Plugins -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/nouislider.min.js"></script>
-<script src="js/jquery.zoom.min.js"></script>
-<script src="js/main.js"></script>
-
-</body>
-
-</html>

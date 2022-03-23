@@ -2,7 +2,7 @@
 include'include/header.php';
 include'include/db_connect.php';
 $id=$_GET['id'];
-$sql = "SELECT * FROM product NATURAL JOIN user NATURAL JOIN subcategory WHERE product.puser_idRegister=$id AND product.subcategory_idsubcategory=subcategory.idsubcategory AND product.puser_idRegister=user.idRegister;";
+$sql = "SELECT * FROM product NATURAL JOIN user NATURAL JOIN subcategory WHERE product.User_idRegister=$id AND product.subcategory_idsubcategory=subcategory.idsubcategory AND product.User_idRegister=user.idRegister;";
 $result = mysqli_query($conn,$sql);
 $num = mysqli_num_rows($result);
 ?>
@@ -81,7 +81,7 @@ $num = mysqli_num_rows($result);
 									</div>
 									<div class="product-body">
 										<p class="product-category">'.$row['subcategoryname'].'</p>
-										<h3 class="product-name"><a href=product.php?pid='.$row['idproduct'].'&sellerid='.$row['puser_idRegister'].'>'.$row['pname'].'</a></h3>
+										<h3 class="product-name"><a href=product.php?pid='.$row['idproduct'].'&sellerid='.$row['User_idRegister'].'>'.$row['pname'].'</a></h3>
 										<h6 class="product-price">Price :- '.$row['price'].'</h6>
 										<h3 class="product-mrp"> MRP :- ' .$row['MRP'].'</h3>
 										<div class="product-btns">

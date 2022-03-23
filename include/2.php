@@ -10,7 +10,7 @@ $uid=$_COOKIE['idRegister'];
 
 ?>
 <?php
-$sql1="SELECT * FROM cart JOIN product ON cart.product_idproduct=product.idproduct WHERE cart.User_idRegister=$uid AND product.puser_idRegister=$sid";
+$sql1="SELECT * FROM cart JOIN product ON cart.product_idproduct=product.idproduct WHERE cart.User_idRegister=$uid AND product.User_idRegister=$sid";
 $result1 = mysqli_query($conn,$sql1);
 $row1= mysqli_fetch_assoc($result1);
 $num1=mysqli_num_rows($result1);

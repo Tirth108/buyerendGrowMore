@@ -4,11 +4,7 @@ include 'include/db_connect.php';
 $JoinSQL="SELECT * FROM product INNER JOIN subcategory ON product.subcategory_idsubcategory=subcategory.idsubcategory order by idproduct desc limit 10";
 $result = mysqli_query($conn,$JoinSQL);
 ?>
-<script>
-function myFunction {
-    color = "red";
-}
-</script>
+
 
 <!-- NAVIGATION -->
 <nav id="navigation">
@@ -121,12 +117,9 @@ function myFunction {
 									</div>
 									<div class="product-body">
 										<p class="product-category">'.$row['subcategoryname'].'</p>
-										<h3 class="product-name"><a href=product.php?pid='.$row['idproduct'].'&sellerid='.$row['puser_idRegister'].'>'.$row['pname'].'</a></h3>
+										<h3 class="product-name"><a href=product.php?pid='.$row['idproduct'].'&sellerid='.$row['User_idRegister'].'>'.$row['pname'].'</a></h3>
 										<h6 class="product-price">Price :- '.$row['price'].'</h6>
 										<h3 class="product-mrp"> MRP :- ' .$row['MRP'].'</h3>
-										<div class="product-btns">
-											<button class="add-to-wishlist" onclick="myFunction()"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-										</div>
 									</div>
 								</div>
 							</div>

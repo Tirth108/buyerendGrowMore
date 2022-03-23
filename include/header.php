@@ -48,6 +48,7 @@ include 'db_connect.php';
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,7 +71,16 @@ include 'db_connect.php';
                     <li><a href="#"><i class="fa fa-map-marker"></i> Navrangpura</a></li>
                 </ul>
                 <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-dollar"></i> IND </a></li>
+                    <?php
+                    $sql2 = "SELECT is_seller FROM `user` WHERE user.idRegister = $_COOKIE[idRegister]";
+                    $result2 = mysqli_query($conn,$sql2);
+                    $row2= mysqli_fetch_assoc($result2);
+                    if($row2 == 1)
+                    {
+                        echo'
+                    <li><a href="#"> Seller </a></li>';
+                    }
+                    ?>
                     <li>
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -78,13 +88,13 @@ include 'db_connect.php';
                                 <span>My Account</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <ul class="abc">
-                               <li> <a class="dropdown-item" href="#">Your Profile</a></li><br>
-                               <li> <a class="dropdown-item" href="#">Seller</a></li><br>
-                               <li> <a class="dropdown-item" href="order.php">Orders</a></li><br>
-                               <li> <a class="dropdown-item" href="#">Returns</a></li><br>
-                               <li> <a class="dropdown-item" href="#">Log Out</a></li><br>
-                            </ul>
+                                <ul class="abc">
+                                    <li> <a class="dropdown-item" href="#">Your Profile</a></li><br>
+                                    <li> <a class="dropdown-item" href="seller.php">Seller</a></li><br>
+                                    <li> <a class="dropdown-item" href="order.php">Orders</a></li><br>
+                                    <li> <a class="dropdown-item" href="#">Returns</a></li><br>
+                                    <li> <a class="dropdown-item" href="logout.php">Log Out</a></li><br>
+                                </ul>
                             </div>
                     </li>
                     <!-- <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li> -->
@@ -112,12 +122,64 @@ include 'db_connect.php';
 
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
-                        <div class="header-search">
+                        <!-- <div class="header-search">
                             <form>
                                 <input class="input" placeholder="Search here">
                                 <button class="search-btn">Search</button>
                             </form>
+                        </div> -->
+                        <!--Search Form Drawer-->
+                        <div class="search">
+                            <div class="search__form">
+
+
+                                <input type="text" class="form-control" name="live_search" id="live_search"
+                                    autocomplete="off" placeholder="Search ...">
+
+                                <button type="button" class="search-trigger close-btn"><i
+                                        class="anm anm-times-l"></i></button>
+
+                            </div>
+                            /
                         </div>
+                        <!--End Search Form Drawer-->
+                        <!-- <div class="site-header__search"> -->
+
+                        <!-- <button type="button" class="search-trigger"><i class="icon anm anm-search-l"></i></button> -->
+                        <!-- <input type="text" class="form-control" name="live_search" id="live_search" autocomplete="off" placeholder="Search ..."> -->
+
+                        <!-- </div> -->
+
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#live_search").keyup(function() {
+                                var query = $(this).val();
+                                if (query != "") {
+                                    $.ajax({
+                                        url: 'ajax-live-search.php',
+                                        method: 'POST',
+                                        data: {
+                                            query: query
+                                        },
+                                        success: function(data) {
+                                            $('#search_result').html(data);
+                                            $('#search_result').css('display', 'block');
+                                            $("#live_search").focusout(function() {
+                                                $('#search_result').css('display',
+                                                    'none');
+                                            });
+                                            $("#live_search").focusin(function() {
+                                                $('#search_result').css('display',
+                                                    'block');
+                                            });
+                                        }
+                                    });
+                                } else {
+                                    $('#search_result').css('display', 'none');
+                                }
+                            });
+                        });
+                        </script>
                     </div>
                     <!-- /SEARCH BAR -->
                     <!-- ACCOUNT -->
@@ -155,4 +217,5 @@ include 'db_connect.php';
         </div>
         <!-- /MAIN HEADER -->
     </header>
+    <div id="search_result"></div>
     <!-- /HEADER -->
